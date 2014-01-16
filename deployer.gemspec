@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Deployer::VERSION
   spec.authors       = ["Brad Herring"]
   spec.email         = ["bradherring@bherville.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Deploys code updates into git"
+  spec.summary       = "Application deployment"
   spec.homepage      = ""
   spec.license       = "MIT"
 
