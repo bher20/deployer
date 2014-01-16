@@ -76,10 +76,14 @@ class Deployment
 
     tag_name = @@version
     @@logger.info { "Creating tag #{tag_name}" }
-    if working_copy.tag.include? tag_name
+
+    #Check to see if tag already exists
+    begin
+      working_copy.tag(tag_name)
+
       @@logger.warn { "Tag #{tag_name} already exists, not creating." }
-    else
-      tag = working_copy.add_tag("#{tag_name}")
+    rescue
+      working_copy.add_tag("#{tag_name}")
     end
 
     @@logger.info { "Pushing updates to the origin master with the tag" }
