@@ -54,7 +54,7 @@ class Deployment
     wc.checkout tag
   end
 
-  def deploy (deploy_source, working_copy_dir)
+  def deploy (deploy_source, working_copy_dir, force = false)
     working_copy = prepare_working_copy working_copy_dir
 
     @@logger.info { "Deploying..." }
@@ -70,8 +70,12 @@ class Deployment
     begin
       @@logger.info { "Commiting changes" }
       working_copy.commit_all("Updated: Release #{@@version}")
-    rescue
-      @@logger.warn { "Commiting changes" }
+    rescue Exception => e
+      @@logger.warn { "No new were detected, not commiting" }
+
+      if !force
+        raise e
+      end
     end
 
     tag_name = @@version
